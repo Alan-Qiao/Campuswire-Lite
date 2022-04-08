@@ -1,6 +1,8 @@
 const isAuthenticated = (req, res, next) => {
   if (!req.session || !req.session.username) {
-    next(new Error('User not Authenticated'))
+    const err = new Error('User not Authenticated')
+    err.code = 401
+    next(err)
   } else {
     next()
   }
